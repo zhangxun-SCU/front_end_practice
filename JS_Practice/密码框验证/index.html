@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .wrong{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <label for="pwd"></label><input type="password" id="pwd">
+    <p class="message">请输入6~16位密码</p>
+</div>
+<script>
+    let pwd = document.getElementById("pwd");
+    let p = document.getElementsByTagName("p")[0];
+    pwd.addEventListener('blur', function () {
+       if(this.value.length < 6||this.value.length > 16){
+           console.log('错误');
+           p.classList.add('wrong');
+       }
+    });
+</script>
+</body>
+</html>

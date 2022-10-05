@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css" rel="stylesheet">
+        #box1{
+            background-color: tomato;
+            width: 100px;
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+<button id="btn01">点我</button>
+<div id="box1">
+
+</div>
+
+
+<script>
+    let box1 = document.getElementById("box1");
+    let w =100;
+    document.getElementById("btn01").onclick = function (){
+        w += 10;
+        box1.style.width = w + "px";
+    };
+</script>
+</body>
+</html>

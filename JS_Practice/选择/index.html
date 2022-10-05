@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>选择</title>
+</head>
+<!---->
+<body>
+<form  method="post">
+    <label><input type="checkbox" name="schools" value="四川大专">穿戴</label>
+    <label><input type="checkbox" name="schools" value="电子科技大学">电科</label>
+    <label><input type="checkbox" name="schools" value="北大">北大</label>
+    <label><input type="checkbox" name="schools" value="清华">清华</label>
+    <br>
+    <button type="button" id="checkAllBtn">全选</button>
+    <button type="button" id="checkNoBtn">全不选</button>
+    <button type="button" id="checkRevBtn">反选</button>
+    <button type="submit" id="summit">提交</button>
+</form>
+<script>
+    //获取四个多选框
+    let checkedBtn = document.getElementsByName("schools");
+    //全选功能
+    let checkAllBtn = document.getElementById("checkAllBtn");
+    checkAllBtn.onclick = function (){
+        for(let i = 0; i < checkedBtn.length; ++i){
+            //多选框的checked属性可以用来查看或者设置是否选择，true是选false是不选
+            checkedBtn[i].checked = true;
+        }
+    };
+    //全不选
+    let checkNoBtn = document.getElementById("checkNoBtn");
+    checkNoBtn.onclick = function (){
+      for(let i = 0; i < checkedBtn.length; ++i){
+          checkedBtn[i].checked = false
+      }
+    };
+    //反选
+    let checkRevBtn = document.getElementById("checkRevBtn");
+    checkRevBtn.onclick = function (){
+      for(let i = 0; i < checkedBtn.length; ++i){
+          checkedBtn[i].checked = !checkedBtn[i].checked
+      }
+    };
+    let summit = document.getElementById("summit");
+    summit.onclick = function (){
+      for(let i = 0; i < checkedBtn.length; ++i){
+          if(checkedBtn[i].checked){
+              alert(checkedBtn[i].value)
+          }
+      }
+    };
+</script>
+</body>
+</html>

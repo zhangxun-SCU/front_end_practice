@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>7.14</title>
+    <script>
+
+
+        function Person(name, age){
+            this.name = name;
+            this.age = age;
+
+            this.sayHello = function (){
+                alert(`I' am ${this.name}`);
+            };
+
+        }
+
+
+
+        let per1 = new Person('cw', 19);
+        let per2 = new Person('zx', 20);
+        per1.sayHello();
+        per2.sayHello();
+
+        let arr1 = [1, 2, 2]
+        alert(arr1[arr1.length-1])
+    </script>
+</head>
+<body>
+<h1>
+    第一
+</h1>
+
+<p id="demo">我是一个段落</p>
+
+
+
+</body>
+</html>

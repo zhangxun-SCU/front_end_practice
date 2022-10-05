@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        #box1{
+            background-color: deepskyblue;
+            width: 100px;
+            height: 100px;
+        }
+        .drag{
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+<div id="box1" class="drag">
+
+</div>
+
+<script>
+
+    (function () {
+        /*
+    拖拽：
+        1. 鼠标按下时，开始移动  ：mousedown
+        2.跟随鼠标             ：mousemove
+        3.鼠标松开停止          ：mouseup
+     */
+
+        let box1 = document.getElementById("box1");
+        let dragElement = null
+        let mouseLeft, mouseTop;
+        //我们希望拥有drag类的元素可以拖拽
+        //这时，我们需要用事件的委派，因为我们不知道有多少元素有drag
+        document.addEventListener("mousedown", function (event){
+            /*
+            *   当我们选中文字并进行拖拽时，浏览器会默认尝试将文字
+            *   在搜索引擎中搜索，
+            *   这是浏览器的默认行为，这个行为会影响到拖拽的功能
+            */
+            //如果触发事件的元素含有drag
+            if(event.target.classList.contains('drag')){
+                dragElement = event.target;
+                mouseLeft = event.clientX - dragElement.offsetLeft;
+                mouseTop = event.clientY - dragElement.offsetTop;
+            }
+            event.preventDefault();
+
+            // 鼠标在box1按下时，功能开始
+            // 鼠标按下时，记录鼠标相对于box1的位置
+
+        });
+
+        document.addEventListener('mousemove', function mousemove (event){
+            if(dragElement){
+                let x = event.clientX;
+                let y = event.clientY;
+                box1.style.left = x - mouseLeft + document.documentElement.scrollLeft + "px" ;
+                box1.style.top = y - mouseTop + document.documentElement.scrollTop + "px";
+            }
+
+        });
+
+        document.addEventListener('mouseup', function (event){
+            dragElement = null;
+        });
+    }());
+</script>
+</body>
+</html>

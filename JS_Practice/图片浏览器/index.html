@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css" rel="stylesheet">
+        *{
+            margin: 0;
+            padding: 0;
+        }
+
+        .outer{
+            width: 800px;
+            margin: 30px auto;
+            background-color: #9EB9D4;
+            text-align: center;
+            padding: 10px;
+        }
+
+        img{
+            margin: 0 auto 10px;
+            display: block;
+        }
+
+        .outer
+    </style>
+</head>
+<body>
+<!--创建一个外部容器-->
+<div class="outer">
+    <div id="info">当前第1张，共4张</div>
+    <img src="imgs/1.png" alt="" height="862" >
+    <button id="prev">上一张</button>
+    <button id="next">下一张</button>
+</div>
+<script>
+    let btn_prev = document.getElementById("prev");
+    let btn_next = document.getElementById("next");
+    let img = document.getElementsByTagName("img")[0];
+    let info = document.getElementById("info");
+    //创建一个·数组用来存放图片路径
+    img_path = ["imgs/1.png", "imgs/2.jpg", "imgs/3.png", "imgs/4.jpg"]
+    let i = 0;
+    btn_prev.onclick = function (){
+        if(i === 0){
+            i = img_path.length - 1;
+        }else {
+            --i;
+        }
+        info.innerHTML = "当前第" + (i+1) + "张" + "共4张。";
+        img.src=img_path[i];
+    };
+    btn_next.onclick = function (){
+        if(i === img_path.length - 1){
+            i = 0;
+        }else{
+            ++i;
+        }
+        info.innerHTML = "当前第" + (i+1) + "张" + "共4张。";
+        img.src=img_path[i];
+    };
+</script>
+
+</body>
+</html>

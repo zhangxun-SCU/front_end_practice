@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css" rel="stylesheet">
+        /*table{*/
+        /*    !* width: 500px;*/
+        /*    height: 300px;*/
+        /*    border: 1px solid red; *!*/
+        /*    !* 相当于cellspacing *!*/
+        /*    border-spacing: 0;*/
+        /*    !* 1px边框 *!*/
+        /*    border-collapse: collapse;*/
+        /*}*/
+        /*th,td{*/
+        /*    border: 1px solid red;*/
+        /*    text-align: center;*/
+        /*}*/
+
+        #employeeTable {
+            border-spacing: 1px;
+            background-color: black;
+            margin: 80px auto 10px auto;
+        }
+
+        th, td {
+            background-color: white;
+        }
+
+        #formDiv {
+            width: 250px;
+            border-style: solid;
+            border-width: 1px;
+            margin: 50px auto 10px auto;
+            padding: 10px;
+        }
+
+        #formDiv input {
+            width: 100%;
+        }
+
+        .word {
+            width: 40px;
+        }
+
+        .inp {
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+<table id="employeeTable">
+    <tr>
+        <th>name</th>
+        <th>e-mail</th>
+        <th>salary</th>
+        <th>&nbsp;</th>
+    </tr>
+    <tr>
+        <td>cw</td>
+        <td>1878506329@qq.com</td>
+        <td>50</td>
+        <td><a href="deleteEmp?id=001">delete</a></td>
+    </tr>
+    <tr>
+        <td>zh</td>
+        <td>zhsb@sb.com</td>
+        <td>1000000</td>
+        <td><a href="deleteEmp?id=002">delete</a></td>
+    </tr>
+</table>
+
+<div id="formDiv">
+    <h4>添加新员工</h4>
+    <table>
+        <tr>
+            <td class="word"><label for="empName">name:</label></td>
+            <td class="inp"><input type="text" name="empName" id="empName"></td>
+        </tr>
+        <tr>
+            <td class="word"><label for="email">email:</label></td>
+            <td class="inp"><input type="text" name="email" id="email"></td>
+        </tr>
+        <tr>
+            <td class="word"><label for="salary">salary:</label></td>
+            <td class="inp"><input type="text" name="salary" id="salary"></td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center">
+                <button type="submit" id="addEmpButton">
+                    submit
+                </button>
+            </td>
+        </tr>
+    </table>
+</div>
+<script>
+    /*
+    * 点击超链节后删除员工
+    * */
+    function del (){
+        /*
+        * 点击那个超链接，this就是谁，因为点击的那个超链接才会执行响应函数，这样看links[i]也一样*/
+        let tr = this.parentNode.parentNode;
+        // let tr1 = links[i].parentNode.parentNode;
+        // alert(tr === tr1);
+
+        if (confirm(`确认删除${tr.firstElementChild.innerText}吗？`)){
+            // tr.remove()
+            tr.parentNode.removeChild(tr)
+        }
+        /*
+        * 取消默认行为*/
+        return false
+    }
+    let links = document.getElementsByTagName("a");
+    for(let i = 0; i < links.length; ++i){
+        links[i].onclick = del;
+
+    }
+
+    /*
+    * 点击按钮后，添加员工*/
+    let addEmpButton = document.getElementById("addEmpButton");
+    addEmpButton.onclick = function (){
+        /*
+        将员工信息添加到表格：
+            1.现获取员工信息
+            2.添加员工信息
+         */
+        let name = document.getElementsByName("empName")[0].value;
+        let email = document.getElementsByName("email")[0].value;
+        let salary = document.getElementById("salary").value;
+        // alert(name);
+        // alert(email);
+        // alert(salary);
+
+        /*
+        1.较为麻烦的方式,可优化
+         */
+        //创建一个tr
+        let tr = document.createElement("tr");
+        //创建4个td
+        let nameTd = document.createElement("td");
+        let emailTd = document.createElement("td");
+        let salaryTd = document.createElement("td");
+        let aTd = document.createElement("td");
+        let aLink = document.createElement("a");
+        aLink.href= "deleteEmp?id=00100"
+
+        //创建4个文本节点
+        let nameTxt = document.createTextNode(name);
+        let emailTxt = document.createTextNode(email);
+        let salaryTxt = document.createTextNode(salary);
+        let aTxt = document.createTextNode("delete");
+        //将节点放进去
+        nameTd.append(nameTxt);
+        emailTd.append(emailTxt);
+        salaryTd.append(salaryTxt);
+        aLink.append(aTxt);
+        aTd.append(aLink);
+        tr.append(nameTd);
+        tr.append(emailTd);
+        tr.append(salaryTd);
+        tr.append(aTd);
+        //获取tbody, 注意添加不是加入table而是加入tbody内
+        let employeeTable = document.getElementById("employeeTable");
+        let tbody = employeeTable.getElementsByTagName("tbody")[0];
+        tbody.append(tr);
+        //单独为aLink添加响应函数
+        aLink.onclick = del;
+    };
+</script>
+</body>
+</html>

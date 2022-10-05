@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        #box1{
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            background-color: skyblue;
+        }
+    </style>
+</head>
+<body>
+<div id="box1">
+
+</div>
+<script>
+
+    /*
+    使用定时器来控制移动熟读，而不是简单的使用简单的使用事件，因为事件因为一些机制会产生卡顿现象
+     */
+    //先创建变量来标识方向
+    let box1 = document.getElementById("box1");
+
+    let dir = null;
+    document.addEventListener('keydown', function (event){
+        console.log(event.key);
+        //按下按键的时候给出方向：
+        dir = event.key;
+    });
+    let id = setInterval(function () {
+        switch (dir) {
+            case 'ArrowUp':
+                box1.style.top = box1.offsetTop - 10 + 'px';
+                break;
+            case 'ArrowDown':
+                box1.style.top = box1.offsetTop + 10 + 'px';
+                break;
+            case 'ArrowLeft':
+                box1.style.left = box1.offsetLeft - 10 + 'px';
+                break;
+            case 'ArrowRight':
+                box1.style.left = box1.offsetLeft + 10 + 'px';
+                break;
+        }
+    }, 20);
+    document.addEventListener('keyup', function () {
+        //这里我们直接将dir设置为null来停止移动，而不是停止计时器
+        //因为如果这里停止，而定时器没有绑定事件，那停止后就无法开始了
+        // clearInterval(id);
+        dir = null;
+    });
+
+</script>
+</body>
+</html>

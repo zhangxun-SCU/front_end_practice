@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css" rel="stylesheet">
+        body{
+            height: 6000px;
+        }
+        #box1{
+            width: 100px;
+            height: 100px;
+            background-color: skyblue;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+<div id="box1">
+
+</div>
+
+
+<script>
+    /*
+    是box跟随鼠标移动
+     */
+    let box1 = document.getElementById("box1");
+
+
+    document.onmousemove  = function (event){
+        // 获取垂直滚动条移动的距离
+
+        let x = event.clientX;
+        let y = event.clientY;
+        //pageX是相对于窗口的xy
+
+        // let x = event.pageX;
+        // let y = event.pageY;
+        box1.style.left = x + document.documentElement.scrollLeft + "px" ;
+        box1.style.top = y + document.documentElement.scrollTop + "px";
+    };
+</script>
+</body>
+</html>
